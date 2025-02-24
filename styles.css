@@ -1,0 +1,97 @@
+body {
+    background-color: rgb(0, 0, 0);
+    color: #00ff00;
+    font-family: monospace;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.curved-screen {
+    width: 95%;
+    height: 95%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-size: 20px;
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #008000;
+    filter: contrast(1.5) brightness(0.9);
+    box-shadow: inset 0 0 80px rgba(0, 255, 0, 0.2);
+    border-radius: 20px;
+    position: relative;
+    overflow: auto;
+}
+
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.15) 0px,
+        rgba(0, 0, 0, 0.3) 3px, 
+        rgba(0, 0, 0, 0.15) 6px  
+    );
+    pointer-events: none;
+    animation: scan 6s linear infinite;
+}
+
+.termynal {
+    max-width: 100%;
+    height: 90vh; 
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column; 
+    justify-content: flex-start; 
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+    
+}
+
+.termynal::-webkit-scrollbar {
+    display: none;
+}
+
+.termynal span[data-ty="input"]:empty::after {
+    content: " ";
+    display: block;
+    min-height: 1em;
+}
+
+@keyframes scan {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100px; }
+}
+
+.indented {
+    display: block;
+    padding-left: 20px;
+}
+
+.title {
+    font-size: 50px;
+    text-align: center;
+}
+
+.subtitle{
+    font-size: 30px;
+    text-align: center;
+}
+
+.h1{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.h2{
+    font-size: 20px;
+    font-weight: bold;
+}

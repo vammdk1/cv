@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive CV</title>
+    <link rel="stylesheet" href="termynal.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="termynal.js"></script>
+</head>
+<body>
+    <div class="curved-screen">
+        <div class="scanlines"></div>
+        <div class="termynal" data-termynal>
+            <span data-ty="input">curl /cv</span>
+            <span data-ty="progress"></span>
+            <span data-ty>Buscando datos...</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let terminal = document.querySelector(".termynal");
+            let curlCommand = document.querySelector(".termynal span:nth-child(1)");
+            let loadingMessage = document.querySelector(".termynal span:nth-child(3)"); 
+
+            
+
+            let cvData = {
+                name: "Víctor Martínez",
+                title: "Ingeniero Informático",
+                contact: { dir: "Bilbao, España, 48003", tel:"(+34) 633-197-241", email: "Victor.martinez.dk@gmail.com",
+                linkedin:" www.linkedin.com/in/victormartinezdk", github: "https://github.com/vammdk1"} ,
+                profile: "Profesional con una sólida formación en ingeniería informática y un marcado interés en el desarrollo de nuevas" +
+                    " herramientas y tecnologías. Me considero una persona analítica, detallista y sistemática, con habilidades técnicas y" +
+                    " comunicativas que facilitan la colaboración en equipo junto a una correcta resolución de problemas complejos en entornos" +
+                    " dinámicos. Durante mi trayectoria académica y profesional, he adquirido competencias clave en programación, diseño y" +
+                    " mantenimiento de sistemas, y desarrollo de soluciones innovadoras.",
+                experience: [
+                    { company: "Laboral Kutxa", role: "Prácticas de Ingeniería Informática ", date: "octubre 2023 – junio 2024", 
+                    desc1:"Participación en proyectos de ciberseguridad, fortaleciendo la infraestructura de seguridad de la empresa",
+                    desc2:"Desarrollo Web y proyectos Android", 
+                    desc3:"Implementación de una solución de inteligencia artificial para la resolución de dudas. Llama2, ChatGPT y Gemini" },
+
+                    { company: "Arin Consultora", role: "Técnico en Sistemas", date: "Julio 2019 – septiembre 2021",
+                    desc1:"Soporte técnico a usuarios y sistemas informáticos",
+                    desc2:"Diagnóstico y resolución de problemas técnicos en hardware y software",
+                    desc3:"Gestión de la infraestructura de redes y servidores. Directorio activo, gestión de servidores, equipos personales y periféricos"
+                    },
+                    { company: "Odín Marketing S.L.", role: "Comercial", date: "junio 2018",
+                    desc1:"Venta directa de contratos para Iberdrola, orientado a clientes particulares",
+                    desc2:"Negociación y cierre de acuerdos comerciales",
+                    desc3:"Presentación y promoción de productos energéticos"                        
+                     }
+
+                ],
+                Education: [
+                    { eTitle: "Titulo propio en Ciberseguridad", institution: "Tokio School", date:"julio 2023 – enero 2025", 
+                    data:"Estudio de cifrados, investigaciones Osint, seguridad dispositivos móviles y seguridad web, preparación de defensas y ataques en diferentes entornos."},
+                    { eTitle: "Grado en Ingeniería Informática", institution: "Universidad de Deusto", date:"septiembre 2020 – junio 2024",
+                    data:"Desarrollo de software, desarrollo web, metodologías ágiles, scrum, pruebas de software, inteligencia artificial, robótica, Java, Python, Css, HTML, C++, C, C#, SQL, Maven, Django, Linux, Windows."
+                    },
+                    { eTitle: "Título Propio en Videojuegos, Realidad Virtual y Realidad Aumentada", institution: "Universidad de Deusto", date:"septiembre 2020 – junio 2024",
+                    data:"Diseño y desarrollo de videojuegos, modelado 3D, Maya, Blender, Unity, desarrollo en realidad virtual, desarrollo en realidad aumentada."},
+                    { eTitle: "Técnico Superior en Administración de Sistemas Informáticos en Red", institution: "Centro San Luís (Bilbao)", date:"septiembre 2018 – 2020",
+                    data:"Gestión de redes y sistemas operativos, reparación de hardware, desarrollo web, seguridad informática."}
+                ],
+                languages: [
+                    {language: "Inglés", level: "Título C1 acreditado"},
+                    {language: "Español", level: "Lengua materna"}
+                ]
+            };
+
+            setTimeout(() => {
+                if (loadingMessage) {
+                    loadingMessage.style.display = "none";
+                    curlCommand.style.display = "none";
+                }
+
+                terminal.innerHTML += `<span data-ty class="title">${cvData.name} - ${cvData.title}</span>`;
+                terminal.innerHTML += `<span data-ty="input"></span>`;
+                terminal.innerHTML += `<span data-ty class="subtitle">${cvData.contact.dir} - ${cvData.contact.tel} - ${cvData.contact.email}</span>`;    
+                terminal.innerHTML += `<span data-ty class="subtitle">${cvData.contact.linkedin} - ${cvData.contact.github}</span>`;                
+                terminal.innerHTML += `<span data-ty="input"></span>`;
+
+
+                terminal.innerHTML += `<span data-ty class="h1">Perfil:</span>`;
+                terminal.innerHTML += `<hr style="width: 100%; border: 1px solid white;">`;
+                terminal.innerHTML += `<span data-ty>${cvData.profile}</span>`;
+                terminal.innerHTML += `<span data-ty="input"></span>`;
+
+                terminal.innerHTML += `<span data-ty class="h1">Experiencia:</span>`;
+                terminal.innerHTML += `<hr style="width: 100%; border: 1px solid white;">`;
+                
+                cvData.experience.forEach(exp => {
+                    terminal.innerHTML += `<span data-ty class="h2">${exp.company} | ${exp.role} | ${exp.date}</span>`;
+                    terminal.innerHTML += `<span data-ty class="indented">- ${exp.desc1}</span>`;
+                    terminal.innerHTML += `<span data-ty class="indented">- ${exp.desc2}</span>`;
+                    terminal.innerHTML += `<span data-ty class="indented">- ${exp.desc3}</span>`;
+                    terminal.innerHTML += `<span data-ty="input"></span>`;
+                });
+
+                terminal.innerHTML += `<span data-ty="input"></span>`;
+                terminal.innerHTML += `<span data-ty class="h1">Formación:</span>`;
+                terminal.innerHTML += `<hr style="width: 100%; border: 1px solid white;">`;
+
+                cvData.Education.forEach(edu => {
+                    terminal.innerHTML += `<span data-ty class="h2">${edu.eTitle} | ${edu.institution} | ${edu.date}</span>`;
+                    terminal.innerHTML += `<span data-ty class="indented">- ${edu.data}</span>`;
+                    terminal.innerHTML += `<span data-ty="input"></span>`;
+                });
+
+                new Termynal(".termynal");
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
